@@ -1,0 +1,78 @@
+body{
+    background-color: #fafafa;
+}
+
+.task-container{
+    background-color: white;
+    border: 1px solid #eee;
+    max-width: 800px;
+    margin: 15px auto;
+    padding: 10px;
+}
+
+.head-container{
+    margin-top: 40px;
+}
+
+.empty-container{
+    max-width: 800px;
+    margin: 50px auto;
+    margin-bottom: 0px;
+}
+
+.brand-logo .material-icons {
+    margin-left: 15px;
+    font-size: 40px;
+}
+
+.nav-wrapper {
+    background-color: #26a69a;
+}
+
+/* Materialize check-box bug fix */
+
+label {
+  pointer-events: auto;
+}
+
+[type="checkbox"]+label {
+    margin-left: 10px;
+}
+
+.row {
+    margin-bottom: 0px;    
+}
+
+
+input[type=checkbox]:checked + label.strikethrough {
+  text-decoration: line-through;
+}
+
+.dropdown-button{
+    float: right;
+    padding: 0px;
+    
+}
+
+i.priority-mark.material-icons {
+    position: absolute;
+    margin-left: -5px;
+    color: palevioletred;
+    font-size: 20px;
+    margin-top: 1px;
+}
+
+
+.col.s12.createdby {
+    padding-left: 20px;
+    color: #888;
+    font-size: 12px;
+}
+
+.switch label input[type=checkbox]:checked+.lever {
+    background-color: #db709369;
+}
+
+.switch label input[type=checkbox]:checked+.lever:after {
+    background-color: palevioletred;
+}
