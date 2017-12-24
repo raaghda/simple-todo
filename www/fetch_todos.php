@@ -1,11 +1,16 @@
 <?php
-require 'database.php';
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$db = "todos";
+$pdo = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
+
 $priorityQuery = "";
 if(isset($_GET['p'])) {
-    $priorityQuery = "WHERE priority='1'";
+    $priorityQuery = "AND priority='1'";
 }
 $fetch_todos = $pdo->prepare
-    ("SELECT title, createdby, completed, priority, todoid FROM todos $priorityQuery
+    ("SELECT title, createdby, completed, priority, todoid FROM todos WHERE completed = $completed $priorityQuery
         ORDER by todoid DESC"    );
 $fetch_todos->execute();
 $tasks = $fetch_todos->fetchAll(PDO::FETCH_ASSOC);

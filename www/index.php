@@ -18,7 +18,7 @@
     <body>
         <nav>
             <div class="nav-wrapper">
-                <a href="#!" class="brand-logo"><i class="large material-icons">done_all</i>2Do list</a>
+                <a href="index.php" class="brand-logo"><i class="large material-icons">done_all</i>2Do list</a>
             </div>
         </nav>
         <div class="head-container task-container">
@@ -63,8 +63,18 @@
         </div>
         <?php 
             //Imports and displays tasks from database
+            $completed = 0;
             require 'fetch_todos.php';
-        ?>            
+        ?>    
+        <div class="empty-container">
+            <h5>Completed todos:</h5>
+        </div>
+        <?php 
+            //Imports and displays tasks from database
+            $completed = 1;
+            require 'fetch_todos.php';
+            require 'footer.php';
+        ?> 
     </body>
       <?php if(isset($_GET['success'])){ ?>
         <script>Materialize.toast('A new todo has been added!', 4000)</script>
@@ -85,4 +95,5 @@
     <?php if(isset($_GET['edited'])){ ?>
         <script>Materialize.toast('Task task has been updated.', 4000)</script>
         <?php } ?>
+
 </html> 

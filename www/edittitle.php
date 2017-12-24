@@ -11,7 +11,7 @@ $password = "root";
 $db = "todos";
 $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
 
-$gettitle = "SELECT title FROM todos WHERE title='$title'";
+$gettitle = "SELECT title FROM todos WHERE title='$title' AND NOT IN ($todoid)";
 
 $countrows = $conn->prepare($gettitle);
 $countrows->execute();

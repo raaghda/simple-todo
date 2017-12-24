@@ -76,3 +76,23 @@ i.priority-mark.material-icons {
 .switch label input[type=checkbox]:checked+.lever:after {
     background-color: palevioletred;
 }
+
+/* FOOTER */
+#footer{
+    width: 100%;
+    height: 200px;
+    background: #444;
+    color: #fff;
+    margin-top: 50px;
+    text-align: center;
+    padding-top: 50px;
+}
+
+#footer a{
+    color: #fff;
+}
+
+#footer img{
+    width: 30px;
+    height: auto;
+}
