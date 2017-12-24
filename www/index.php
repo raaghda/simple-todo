@@ -81,4 +81,8 @@
     <?php if(isset($_GET['duplicatetitle'])){ ?>
         <script>Materialize.toast('Title cannot be duplicate.', 4000)</script>
         <?php } ?>
+    
+    <?php if(isset($_GET['edited'])){ ?>
+        <script>Materialize.toast('Task task has been updated.', 4000)</script>
+        <?php } ?>
 </html> 

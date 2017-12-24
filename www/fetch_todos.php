@@ -10,30 +10,45 @@ $fetch_todos = $pdo->prepare
 $fetch_todos->execute();
 $tasks = $fetch_todos->fetchAll(PDO::FETCH_ASSOC);
 
+$editTodoid = -1;
+if(isset($_GET['todoid'])) {
+    $editTodoid = intval($_GET['todoid']);
+}
 
 //Loop for showing each unfinished todo
 foreach ($tasks as $task){ ?>
 
-<div class="task-container">
+<div class="task-container" id="todo<?php echo($task["todoid"]); ?>">
     <div class="row">
         <?php if ($task["priority"]==1){ echo '<i title="Prioritised" class="priority-mark material-icons">priority_high</i>';} ?>   
         
         <div class="col s9">
-            <div class="checkbox">                
+            <?php if ($editTodoid == $task["todoid"]){ ?>
+                <form class="col s12" action="edittitle.php" method="POST">
+                        <div class="input-field">
+                            <input id="input_text" value="<?php echo($task["title"]); ?>" required type="text" name="todotext" data-length="60" maxlength="60">
+                            <label for="input_text">Ex. pick up christmas gifts</label>
+                        </div>
+                        <input name="todoid" type="hidden" value="<?php echo($task["todoid"]); ?>">
+                        <button class="right btn waves-effect waves-light" type="submit" name="action">Save
+                        <i class="material-icons right">done_all</i>
+                        </button>
+                </form>
+            <?php } else { ?>
+            <div class="checkbox">
                 <input type="checkbox" <?php if ($task["completed"]==1){ echo 'checked="checked"';} ?> name="completed" id="<?php echo($task["todoid"]); ?>" />
-                <label class="strikethrough" for="<?php echo($task["todoid"]); ?>"><?php echo($task["title"]); ?></label>
-                
+                <label onClick="window.location.href = 'toggletodo.php?todoid=<?php echo($task["todoid"]); ?>&completed=<?php echo($task["completed"]); ?>'" class="strikethrough" for="<?php echo($task["todoid"]); ?>"><?php echo($task["title"]); ?></label>
             </div>
+            <?php } ?>
          </div>
         <div class="col s3">
             <!-- Dropdown Trigger -->
-            <a class='dropdown-button btn-flat' data-hover="true" href='#' data-activates='dropdown1'><i class="small material-icons">more_vert</i></a>
+            <a class='dropdown-button btn-flat' data-hover="true" href='#' data-activates='dropdown<?php echo($task["todoid"]); ?>'><i class="small material-icons">more_vert</i></a>
             <!-- Dropdown Structure -->
-           <ul id='dropdown1' class='dropdown-content'>
-            <li><a href="#!">edit</a></li>
-            <li><a href="#!">prioritise</a></li>
+           <ul id='dropdown<?php echo($task["todoid"]); ?>' class='dropdown-content'>
+            <li><a href="?todoid=<?php echo($task["todoid"]); ?>#todo<?php echo($task["todoid"]); ?>">edit</a></li>
             <li class="divider"></li>
-            <li><a href="#!">delete</a></li>
+            <li><a href="deletetodo.php?todoid=<?php echo($task["todoid"]); ?>">delete</a></li>
           </ul>
         </div> 
     </div>
