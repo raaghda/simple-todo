@@ -5,10 +5,13 @@ $password = "root";
 $db = "todos";
 $pdo = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
 
+/* Priority query is empty, if the get parameter is set, the priority is set as prioritised */
 $priorityQuery = "";
 if(isset($_GET['p'])) {
     $priorityQuery = "AND priority='1'";
 }
+
+/* Fetching todos through SQL query by descending order */
 $fetch_todos = $pdo->prepare
     ("SELECT title, createdby, completed, priority, todoid FROM todos WHERE completed = $completed $priorityQuery
         ORDER by todoid DESC"    );
@@ -20,7 +23,7 @@ if(isset($_GET['todoid'])) {
     $editTodoid = intval($_GET['todoid']);
 }
 
-//Loop for showing each unfinished todo
+/*Loop for showing each unfinished todo */
 foreach ($tasks as $task){ ?>
 
 <div class="task-container" id="todo<?php echo($task["todoid"]); ?>">
@@ -40,6 +43,7 @@ foreach ($tasks as $task){ ?>
                         </button>
                 </form>
             <?php } else { ?>
+            <!-- Checkbox for completed/uncompleted todo -->
             <div class="checkbox">
                 <input type="checkbox" <?php if ($task["completed"]==1){ echo 'checked="checked"';} ?> name="completed" id="<?php echo($task["todoid"]); ?>" />
                 <label onClick="window.location.href = 'toggletodo.php?todoid=<?php echo($task["todoid"]); ?>&completed=<?php echo($task["completed"]); ?>'" class="strikethrough" for="<?php echo($task["todoid"]); ?>"><?php echo($task["title"]); ?></label>
@@ -57,7 +61,7 @@ foreach ($tasks as $task){ ?>
           </ul>
         </div> 
     </div>
-    
+    <!-- Author area -->
     <div class="row">
         <div class="col s12 createdby">
             <i class="tiny material-icons">person</i>

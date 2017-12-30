@@ -1,9 +1,9 @@
 <?php
-
+/* If title of todo is not given  -> error message will appear */
 if (!isset($_POST["todotext"]) or strlen($_POST["todotext"])==0){
     header('Location: index.php?missingtitle=1'); 
 }
-
+/* If author of the todo is left blank -> error message will appear */
 if (!isset($_POST["createdby"]) or strlen($_POST["createdby"])==0){
     header('Location: index.php?missingauthor=1'); 
 }
@@ -11,14 +11,14 @@ if (!isset($_POST["createdby"]) or strlen($_POST["createdby"])==0){
 $title=$_POST["todotext"];
 $createdby=$_POST["createdby"];
 
+/* Priority default is set to 0 (no priority), if set = 1 */
 $priority=0;
 if (isset($_POST["prioritise"])) {
     $priority=1;
 }
 
 
-//För att kunna ha något med db att göra (alltså kommunícera med den) så måste man ALLLLTIIIID ansluta sig till den först.
-//Nu ska vi ansluta oss till db
+/*In order to communicate with the db, a connection have to be made first. Here, we are connecting to the db */
 
 $servername = "localhost";
 $username = "root";
@@ -34,6 +34,7 @@ $countrows->execute();
 /* Return number of rows that were counted */
 $count = $countrows->rowCount();
 
+/* No allowance for duplicate title names. If there are the same title name -> user will be sent back to index with msg of failure. If title given is not duplicate, the new todo will be added to the db */
 if ($count > 0){
    header('Location: index.php?duplicatetitle=1'); 
 } else {
@@ -41,12 +42,9 @@ if ($count > 0){
     $sql = "INSERT INTO todos (title, createdby, priority)
         VALUES ('$title', '$createdby', '$priority')";
 
-    //execution of the sql string
+    //execution of the sql string.
     $conn->exec($sql);
 
     header('Location: index.php?success=1'); 
 } 
-    
-    
-
 ?>
