@@ -93,7 +93,7 @@
         <?php } ?>
     
     <?php if(isset($_GET['edited'])){ ?>
-        <script>Materialize.toast('Task task has been updated.', 4000)</script>
+        <script>Materialize.toast('Task has been updated.', 4000)</script>
         <?php } ?>
 
 </html> 

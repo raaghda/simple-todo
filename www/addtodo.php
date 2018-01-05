@@ -27,11 +27,10 @@ $db = "todos";
 $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
 
 $gettitle = "SELECT title FROM todos WHERE title='$title'";
-
 $countrows = $conn->prepare($gettitle);
 $countrows->execute();
 
-/* Return number of rows that were counted */
+/* Counts and returns number of rows that were counted */
 $count = $countrows->rowCount();
 
 /* No allowance for duplicate title names. If there are the same title name -> user will be sent back to index with msg of failure. If title given is not duplicate, the new todo will be added to the db */

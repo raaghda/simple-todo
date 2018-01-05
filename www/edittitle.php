@@ -13,7 +13,9 @@ $password = "root";
 $db = "todos";
 $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
 
-/*  */
+/* Get all titles with the same as the modified todo, WITHOUT getting the title of the modified task itself 
+This allows the editing and saving of the task. The NOT IN part only applies when the task is not edited but not modified - then this disallows the todoid to be included in the counting as otherwise you'd always get a '1' back, making it impossible to edit the task */
+
 $gettitle = "SELECT title FROM todos WHERE title='$title' AND NOT IN ($todoid)";
 
 $countrows = $conn->prepare($gettitle);
