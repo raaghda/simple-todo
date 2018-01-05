@@ -24,3 +24,7 @@ Copy the content inside this repisitory's www folder to your local www folder.
 
 ### Database
 ![alt Database](https://github.com/raaghda/simple-todo/blob/master/db/todos.png?raw=true)
+
+
+## Screenshot
+![alt Screenshot](https://raw.githubusercontent.com/raaghda/simple-todo/5ca59e87af2408794f7de0153cea364c653070fb/screenshot-todo.jpg)
